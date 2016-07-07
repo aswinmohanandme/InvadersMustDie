@@ -16,14 +16,17 @@ function love.load(arg)
     hero.width = 32
     hero.height = 16
 
+    -- Seed Random Numbers
+    math.randomseed(os.time())
+
     enemies = {}
     for i = 0 , 7 do
         enemy = {}
         enemy.width = 40
         enemy.height = 20
         enemy.posX = i * (enemy.width + 60 ) + 100
-        enemy.posY = enemy.height + 100
-        enemy.speed = 10
+        enemy.posY = math.random(1, 100)
+        enemy.speed = 15 
         table.insert(enemies , enemy)
     end
 
@@ -74,7 +77,7 @@ function love.update(dt)
 
     -- Move the Enemies down
     for i , v in ipairs(enemies) do
-        v.posY = v.posY + v.speed * dt * math.random()
+        v.posY = v.posY + v.speed * dt * math.random(1 , 10)
 
         -- If they Hit the Ground YOu are Dead
         if v.posY > 445 then
